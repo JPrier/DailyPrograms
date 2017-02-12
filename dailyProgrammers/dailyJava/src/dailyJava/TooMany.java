@@ -1,6 +1,7 @@
 package dailyJava;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,14 +18,11 @@ import java.util.Scanner;
  * Removing any matching set of parentheses does not leave a "single" parenthesesed group that was previously 
  * enclosed by the parentheses in question.
  */
-
 public class TooMany {
 	private static String tooMany(String e){
 		List<List<Integer>> pair = findPar(e);
-		//TODO: This method is not properly collecting pairs to filter
 		List<Integer> pars = new ArrayList<>();
-		System.out.println(pair.toString());
-		for(int i=0; i<pair.size(); i++){
+		for(int i=0; i<pair.size()-1; i++){
 			if (pair.size() - 1> i && (pair.get(i).get(0) == pair.get(i + 1).get(0) - 1 || pair.get(i).get(0) == pair.get(i + 1).get(0) + 1) && 
 					(pair.get(i).get(1) == pair.get(i + 1).get(1) - 1 || pair.get(i).get(1) == pair.get(i + 1).get(1) + 1)){
 				pars.add(pair.get(i).get(0));
@@ -39,15 +37,15 @@ public class TooMany {
 	}
 	private static String filterExp(List<Integer> p, String e){
 		int j = 0;
+		Collections.sort(p);
 		StringBuilder sb = new StringBuilder(e);
-		System.out.println(p.toString());
 		for(int i = 0; i < p.size(); i++){
 			sb.deleteCharAt(p.get(i) - j);
 			j++;
 		}
 		return sb.toString();
 	}
-	//TODO: I think findPar is not collecting parentheses indices correctly
+	
 	private static List<List<Integer>> findPar(String e){
 		List<List<Integer>> pairs = new ArrayList<>();
 		int j =0;
