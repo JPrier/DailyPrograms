@@ -18,7 +18,6 @@ import java.util.Scanner;
  * enclosed by the parentheses in question.
  */
 
-//TODO: Why the hell is this in a class...go to bed dumbass
 public class TooMany {
 	private static String tooMany(String e){
 		List<List<Integer>> pair = findPar(e);
